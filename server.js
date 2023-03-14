@@ -30,11 +30,14 @@ io.on('connection', (socket)=>{
         socket.nickname = pseudo;
         console.log (pseudo);
     });
-    socket.on('emission_message', (valueMes)=>{
-        socket.emit('reception_message', `${socket.nickname} + ${valueMes}`);
-        console.log(messages);
-        })
-        
-});
+    socket.on('emission_message', (message)=>{
+        socket.broadcast.emit('reception_message', `${socket.nickname} + ${message}`);
+        socket.emit('reception_message', `${socket.nickname} + ${message}`);
+        console.log(message);
+        });
+
+       
+            
+})
 
 

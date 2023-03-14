@@ -5,6 +5,7 @@ socket.emit('set-pseudo', prompt("Pseudo ?"));
 var messages = document.getElementById('messages');
 var form = document.getElementById("form");
 var input = document.getElementById('message');
+var button = document.getElementById("disco")
 
 
 form.addEventListener('submit', (e) =>{
@@ -17,7 +18,7 @@ form.addEventListener('submit', (e) =>{
 
 socket.on('reception_message', (contenu)=>{
 var message = document.createElement('li');
-message.textContent = contenu;
+message.innerHTML = contenu;
 messages.appendChild(message);
 
 });
