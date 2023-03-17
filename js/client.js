@@ -10,7 +10,6 @@ var input = document.getElementById('message');
 var id_salon = "salon";
 var lesMessages = [];
 
-
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   let Message = {
@@ -19,21 +18,33 @@ form.addEventListener('submit', (e) => {
     content : input.value
   } 
   socket.emit('emission_message', Message);
-  //input.value="";
-  
 })
 
 socket.on('reception_message', (Message) => {
-  var message = document.createElement('li');
-  message.innerHTML = Message.content;
-  messages.appendChild(message);
-  lesMessages = [];
+  messages.innerHTML = "";
   lesMessages.push(Message)
-  console.log("Message stockés" +lesMessages)
-
   lesMessages.forEach(element => {
-    
+    if(element.emeteur === pseudo && element.recepteur === chat_select){
+      var text = document.createElement('li');
+      text.classList.add("envoye")
+      text.innerHTML = element.content
+      messages.appendChild(text);
+      console.log("message envoyé")
+    }else if(element.emeteur === chat_select && element.recepteur === pseudo){
+      var text = document.createElement('li');
+      text.classList.add("recu")
+      text.innerHTML = element.content
+      messages.appendChild(text);
+      console.log("message reçu")
+    }else if(element.recepteur === chat_select && chat_select === 'general'){
+      var text = document.createElement('li');
+      text.classList.add("general")
+      text.innerHTML = element.content
+      messages.appendChild(text);
+      console.log("message general")
+    }//condition éméteur et recepteur 2 cond
   });
+  console.log("Message stockés" +lesMessages)
 
 });
 
@@ -65,3 +76,5 @@ socket.on('reception_user', (users) => {
     
   });
 })
+
+
