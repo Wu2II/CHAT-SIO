@@ -46,18 +46,19 @@ socket.on('reception_message', (Message) => {
   });
   console.log("Message stockés" +lesMessages)
 
+  
 });
 
 function salon(id) {
   chat_select = id
-  messages.innerHTML = ''
+  socket.emit("sync", lesMessages)
 
 }
 
 socket.on('reception_user', (users) => {
   console.log(users)
   var users_list = document.getElementById('users_list');
-  users_list.innerHTML = "<li><button id='general' onclick='salon('general')'>Géneral</button></li";
+  users_list.innerHTML = `<li><button id='general' onclick="salon('general')">Géneral</button></li`;
   let user_item = users.map((user) => {
     if (user.pseudo_client !== pseudo){
       var list_item = document.createElement('li');
