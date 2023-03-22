@@ -10,6 +10,7 @@ let PORT = 8082;
 let infosUtilisateur;
 
 const mariadb = require ('mariadb');
+const { query } = require('express');
 const db = mariadb.createPool({
     host:'localhost:8080/',
     user:'root',
@@ -30,11 +31,32 @@ server.listen(PORT, () => {
 });
 
 app.get('/', (req, res) => {
+
     res.sendFile(path.join(__dirname, 'login.html'));
 });
 
 app.get('/salon', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    if(req.session.loggedin){
+        res.sendFile(path.join(__dirname, 'index.html'));
+    }else{
+        res.send("Erreur, accès non autorisé ! ")
+    }
+    
+});
+
+app.post('/salon', async(res,req)=>{
+var user_email_adress = request.body.user_email_adress;
+var user_login = request.body.user_login;
+var user_password = request.body.user_password;
+
+if(user_email_adress && user_password && user_login){
+    query= `SELECT * FROM utilisateurs
+            WHERE mail ="${user_email_adress}"`;
+
+    database.query(query, function(error, data){
+
+    })
+}
 });
 
 app.get('/client', (req, res) => {
