@@ -5,20 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style">
 </head>
+
 <body>
-    <form id="form" method="post" action="/dotfiles/CHAT-SIO/server.js">
+    <div class="form">
+        <div class="title">Welcome</div>
+        <div class="subtitle">Let's create your account!</div>
+       
+    <form id="log_form" method="post">
+        <div class="input-container ic1">
         <label>
             Login
-            <input type="text" id="login"/>
+            <input class="input" type="text" id="login"/>
         </label>
+        </div>
+        <div class="input-container ic2">
         <label>
             Password
-            <input type="password" id="password"/>
+            <input class="input" type="password" id="password"/>
         </label>
-        <button id="submit-button">connecter</button>
+        </div>
+        <button type="text" class="submit" id="submit">connecter</button>
         
 
     </form>
 </body>
+<script src="socket.io/socket.io.js"></script>
+<script src="client"></script>
 </html>

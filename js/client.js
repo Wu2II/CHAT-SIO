@@ -1,16 +1,26 @@
 var socket = io();
 
-var pseudo = prompt("Pseudo ?")
+var pseudo = "uu";
 var chat_select = 'general';
 socket.emit('set-pseudo', pseudo);
+console.log("ok");
 
 var messages = document.getElementById('messages');
 var form = document.getElementById("form");
 var input = document.getElementById('message');
 var id_salon = "salon";
 var lesMessages = [];
+var log_form = document.getElementById("log_form");
 
-form.addEventListener('submit', (e) => {
+log_form.addEventListener('submit', (e) => {
+  e.preventDefault()
+  user_password = e.target.password.value,
+  user_login = e.target.login.value
+
+  socket.emit('recup_log', user_login,user_password);
+});
+
+form.addEventListener('form', (e) => {
   e.preventDefault();
   let Message = {
     emeteur : pseudo, 

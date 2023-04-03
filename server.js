@@ -14,9 +14,11 @@ const { query } = require('express');
 const db = mariadb.createPool({
     host:'localhost:8080/',
     user:'root',
-    password:'root',
+    password:'mypass123',
     database: 'sio_chat'
 });
+
+
 
 app.use(session({
     secret: 'secret',
@@ -45,9 +47,8 @@ app.get('/salon', (req, res) => {
 });
 
 app.post('/salon', async(res,req)=>{
-var user_email_adress = request.body.user_email_adress;
-var user_login = request.body.user_login;
-var user_password = request.body.user_password;
+
+console.log("test ici")
 
 if(user_email_adress && user_password && user_login){
     query= `SELECT * FROM utilisateurs
@@ -97,6 +98,9 @@ io.on('connection', (socket) => {
         io.emit('reception_user', Object.values(utilisateur));
     })
 
+    socket.on('recup_log', (user_login, user_password) => {
+        console.log(user_login, user_password);
+        });
     
 })
 
