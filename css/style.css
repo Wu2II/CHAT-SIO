@@ -6,7 +6,7 @@ body {
   display: flex;
   justify-content: center;
   height: 100vh;
-  background-image: url(https://cdn.discordapp.com/attachments/1052588146665201675/1092565468126138389/339496315_581578643919771_2228496724389508492_n.jpg);
+  background-color: #08d;
 }
 
 .form {
